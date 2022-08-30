@@ -20,8 +20,8 @@
                     {{ auth()->user()->name }}
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Profil</a></li>
-                    <li><a class="dropdown-item" href="#">Ganti Password</a></li>
+                    <li><a class="dropdown-item" href="/profile">Profil</a></li>
+                    <li><a class="dropdown-item" href="/profile/changepassword">Ganti Password</a></li>
                     <li>
                         <hr class="dropdown-divider" />
                     </li>

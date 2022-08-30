@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,6 +25,13 @@ Route::get('/login', [LoginController::class, 'index'])->name('login')->middlewa
 Route::post('/login', [LoginController::class, 'authenticate']);
 Route::post('/logout', [LoginController::class, 'logout']);
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
-Route::get('/report', [ReportController::class, 'index'])->middleware('auth');
-Route::get('/report/exportpdf', [ReportController::class, 'exportPdf'])->middleware('auth');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index']);
+    Route::get('/report', [ReportController::class, 'index']);
+    Route::get('/report/exportpdf', [ReportController::class, 'exportPdf']);
+    Route::get('/profile', [ProfileController::class, 'index']);
+    Route::get('/profile/editprofile', [ProfileController::class, 'editProfile']);
+    Route::post('/profile/updateprofile', [ProfileController::class, 'updateProfile']);
+    Route::get('/profile/changepassword', [ProfileController::class, 'changePassword']);
+    Route::post('/profile/updatepassword', [ProfileController::class, 'updatePassword']);
+});
